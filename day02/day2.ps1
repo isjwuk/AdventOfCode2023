@@ -36,8 +36,26 @@ $games=$games | Select-Object GameNumber,@{Name="Cubes";Expression={ $_.Sets | `
 #which games would have been possible if the bag contained only 12 red cubes, 13 green cubes, and 14 blue cubes
 #What is the sum of the IDs of these games?
 
-"The answer is "+ `
+"The answer to Part 1 is "+ `
     [string](($games |`
          Where-Object {!($_.Cubes.Red -gt 12) -and
              !($_.Cubes.Green -gt 13) -and
              !($_.Cubes.Blue -gt 14)}).GameNumber | Measure-Object -sum).Sum
+
+
+#Part 2
+#Find the minimum number of each colour required in each game.
+#so in each game we need the largest red number, largest green number, and largest blue number.
+#The largest red number in the first game can be found with
+# ($games[0].Cubes.Red | Measure-Object -Maximum).Maximum
+#Calculate the "MaxRed", "MaxGreen", and "MaxBlue" fields
+$games=$games | Select-Object GameNumber, `
+         @{Name="MaxRed";Expression={[int]($_.Cubes.Red | Measure-Object -Maximum).Maximum}}, `
+         @{Name="MaxGreen";Expression={[int]($_.Cubes.Green | Measure-Object -Maximum).Maximum}}, `
+         @{Name="MaxBlue";Expression={[int]($_.Cubes.Blue | Measure-Object -Maximum).Maximum}}
+
+#Calculate the "Power" Field- the three max fields multiplied together
+$games=$games | Select-Object GameNumber, @{Name="Power";Expression={$_.MaxRed*$_.MaxGreen*$_.MaxBlue}}
+#The answer is the sum of these Power values.
+"The answer to Part 2 is "+ `
+    [string]($games.Power | Measure-Object -Sum).Sum
