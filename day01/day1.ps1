@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-    Solving Day 1 of the Festive Tech Calendar
+    Solving Day 1 of the Advent of Code 2023
 #>
 $inputfilepath=".\sampledata-part1.txt"
 
