@@ -57,7 +57,7 @@ for($y=0;$y -lt $maxY; $y++){ #Loop through rows
                     $symbolFound=$true
                 }
              }
-             if ($lastdigit -lt $MaxX){
+             if ($lastdigit -lt $MaxX -1){
                 #Check top right corner
                 if($inputdata[$y-1][$lastdigit+1] -ne "." -and !($inputdata[$y-1][$lastdigit+1] -in $digits.ToCharArray() )){
                     $symbolFound=$true
@@ -78,7 +78,7 @@ for($y=0;$y -lt $maxY; $y++){ #Loop through rows
                     $symbolFound=$true
                 }
              }
-             if ($lastdigit -lt $MaxX){
+             if ($lastdigit -lt $MaxX -1){
                 #Check bottom right corner
                 if($inputdata[$y+1][$lastdigit+1] -ne "." -and !($inputdata[$y+1][$lastdigit+1] -in $digits.ToCharArray() )){
                     $symbolFound=$true
@@ -92,7 +92,7 @@ for($y=0;$y -lt $maxY; $y++){ #Loop through rows
                 $symbolFound=$true
             }
          }
-        if ($lastdigit -lt $MaxX){
+        if ($lastdigit -lt $MaxX -1){
             #Check  right 
             if($inputdata[$y][$lastdigit+1] -ne "." -and !($inputdata[$y][$lastdigit+1] -in $digits.ToCharArray() )){
                 $symbolFound=$true
